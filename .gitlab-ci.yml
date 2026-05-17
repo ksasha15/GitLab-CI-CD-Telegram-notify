@@ -36,20 +36,16 @@ telegram_notify:
   - apk add --no-cache curl
   - |
     if [ -f status.env ]; then
-     source status.env
+    STATUS="success" 
     else
-     STATUS="failed"
+    STATUS="failed"
     fi
     
     if [ "$STATUS" == "success" ]; then
     MESSAGE=" Pipeline SUCCESS"
-    MESSAGE+="Project: ${CI_PROJECT_NAME}"
-    MESSAGE+="Branch: ${CI_COMMIT_BRANCH}"
-    MESSAGE+="Commit: ${CI_COMMIT_SHORT_SHA}"
-    MESSAGE+="Status: Condition test passed (${TEST_VALUE} < 5)"
     fi
-    curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-    -d "chat_id=${TELEGRAM_CHAT_ID}" \
+    curl -s -X POST "https://api.telegram.org/bot8696749623:AAFYJtIGMQ7vbow-c9eLHk9LOh_z4y1D7KM/sendMessage" \
+    -d "chat_id=1389535163" \
     -d "text=${MESSAGE}" \
     -d "parse_mode=HTML"
 
@@ -60,3 +56,4 @@ telegram_notify:
  variables:
    TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
    TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+   
